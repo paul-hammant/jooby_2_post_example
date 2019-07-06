@@ -1,6 +1,7 @@
 package com.mycompany;
 
 import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
@@ -23,20 +24,14 @@ public class AppTest {
 
   @Test
   public void integrationTest() {
-    get("/")
-        .then()
+    given().
+            param("one", "1").
+    when().
+            post("/foo")
+    .then()
         .assertThat()
-        .body(equalTo("Hello World!"))
-        .statusCode(200)
-        .contentType("text/html;charset=UTF-8");
+        .body(equalTo("Hi 1"));
   }
 
-  @Test
-  public void unitTest() throws Throwable {
-    String result = new MockRouter(new App())
-        .get("/");
-
-    assertEquals("Hello World!", result);
-  }
 
 }
