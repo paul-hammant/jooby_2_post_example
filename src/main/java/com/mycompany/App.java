@@ -1,6 +1,6 @@
 package com.mycompany;
 
-import org.jooby.Jooby;
+import io.jooby.Jooby;
 
 /**
  * @author jooby generator
@@ -8,11 +8,11 @@ import org.jooby.Jooby;
 public class App extends Jooby {
 
   {
-    post("/foo", (req) -> "Hi " + req.param("one").value());
+    post("/foo", (req) -> "Hi " + req.form("one").value());
   }
 
   public static void main(final String[] args) {
-    run(App::new, args);
+    runApp(args, App::new);
   }
 
 }
