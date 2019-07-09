@@ -1,6 +1,7 @@
 package com.mycompany;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.ClassRule;
@@ -14,17 +15,17 @@ public class AppTest {
   @Test
   public void integrationTest() throws InterruptedException {
 
-    new App();
+    App app = new App();
+    app.start();
 
-    Thread.sleep(10000);
+    Thread.sleep(3000);
 
-    given().
-            param("one", "1").
     when().
-            post("/foo")
+            get("/foo")
     .then()
         .assertThat()
-        .body(equalTo("Hi 1"));
+        .statusCode(200)
+        .body(equalTo("I am in the src/main/resources folder"));
   }
 
 

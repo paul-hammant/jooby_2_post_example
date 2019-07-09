@@ -8,7 +8,7 @@ import io.jooby.Jooby;
 public class App extends Jooby {
 
   {
-    post("/foo", (req) -> "Hi " + req.form("one").value());
+      assets("/foo", "hi");
   }
 
   public static void main(final String[] args) {
